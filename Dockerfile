@@ -9,13 +9,15 @@ ENV CGO_ENABLED=${CGO_ENABLED}
 
 WORKDIR /build
 
-RUN git config --global --add safe.directory /build
+# Git commit hash passed from the build environment (optional)
+ARG GIT_COMMIT=unknown
+ENV GIT_COMMIT=${GIT_COMMIT}
+
 COPY go.mod go.sum ./
 RUN go mod download
 COPY Makefile main.go ./
 COPY static/ static/
 COPY pkg/ pkg/
-COPY .git/ .
 RUN make build
 
 # ------------------------------------------------------------------------------

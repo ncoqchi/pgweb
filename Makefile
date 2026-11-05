@@ -1,5 +1,5 @@
 PKG = github.com/sosedoff/pgweb
-GIT_COMMIT ?= $(shell git rev-parse --short=8 HEAD)
+GIT_COMMIT ?= $(shell git rev-parse --short=8 HEAD 2>/dev/null || echo unknown)
 BUILD_TIME ?= $(shell date -u +"%Y-%m-%dT%H:%M:%SZ" | tr -d '\n')
 GO_VERSION ?= $(shell go version | awk {'print $$3'})
 
